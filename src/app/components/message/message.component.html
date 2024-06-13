@@ -8,6 +8,10 @@
       <img alt="Chat bubble" width="40" height="40" [ngSrc]="image()" />
     </div>
   </div>
+  <div class="chat-header">
+    {{ sender() }}
+    <time class="text-xs opacity-50">12:45</time>
+  </div>
   <div class="chat-bubble" [class.chat-bubble-primary]="isUser()">
     @if(hasMessage()){
     <pre class="whitespace-break-spaces">{{ message().content }}</pre>
@@ -15,4 +19,5 @@
     <span class="loading loading-dots loading-sm"></span>
     }
   </div>
+  <div class="chat-footer opacity-50">Delivered</div>
 </article>

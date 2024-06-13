@@ -20,4 +20,5 @@ export class MessageComponent {
   hasMessage = computed(() => Boolean(this.message().content));
   isUser = computed(() => this.message().role === 'user');
   image = computed(() => (this.isUser() ? '/thunder.webp' : '/bot.webp'));
+  sender = computed(() => (this.isUser() ? 'You' : 'NPM Chat'));
 }
