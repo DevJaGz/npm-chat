@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Renderer2,
+  computed,
   inject,
   signal,
 } from '@angular/core';
@@ -18,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 export class PromptComponent {
   readonly #renderer = inject(Renderer2);
   message = signal('');
+  hasMessage = computed(() => this.message() !== '');
 
   onMessageChange($textarea: HTMLTextAreaElement, value: string): void {
     this.message.set(value);

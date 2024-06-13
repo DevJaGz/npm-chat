@@ -1,13 +1,18 @@
-<div class="flex gap-2 items-center">
+<div class="flex gap-2 items-center relative">
   <textarea
     #textareaRef
     rows="1"
     [ngModel]="message()"
     (ngModelChange)="onMessageChange(textareaRef, $event)"
-    class="textarea textarea-bordered flex-1 max-h-48 resize-none rounded-3xl"
+    class="textarea textarea-bordered flex-1 max-h-48 resize-none rounded-3xl pr-10"
     placeholder="Message NPM Chat"
   ></textarea>
-  <button class="btn btn-circle btn-sm" (click)="submitMessage()">
+  <button
+    class="btn btn-circle btn-sm absolute bottom-2 right-2"
+    [class.pointer-events-none]="!hasMessage()"
+    [class.btn-primary]="hasMessage()"
+    (click)="submitMessage()"
+  >
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="32"
