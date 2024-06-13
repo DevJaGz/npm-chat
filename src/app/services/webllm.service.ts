@@ -11,7 +11,11 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class WebllmService implements LLMService {
-  readonly #modelId = 'Llama-3-8B-Instruct-q4f32_1-MLC-1k';
+  // readonly #modelId = 'Hermes-2-Pro-Llama-3-8B-q4f32_1-MLC'; // ✅
+  readonly #modelId = 'gemma-2b-it-q4f16_1-MLC-1k'; // ✅
+  // readonly #modelId = 'Phi-3-mini-4k-instruct-q4f16_1-MLC-1k'; // ❌
+  // readonly #modelId = 'TinyLlama-1.1B-Chat-v1.0-q4f16_1-MLC'; // ❌
+  // readonly #modelId = 'TinyLlama-1.1B-Chat-v1.0-q4f32_1-MLC'; // ❌
   readonly #systemMessage: Message = {
     role: 'system',
     content:
