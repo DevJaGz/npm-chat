@@ -37,10 +37,6 @@ export class WebllmService implements LLMService {
 
   llmReport: Signal<LLMReport> = this.#progressReport.asReadonly();
 
-  get hasEngine(): boolean {
-    return Boolean(this.#engine);
-  }
-
   getChatReply(messages: Messages): Observable<LLMReply> {
     const newMessages = [this.#systemMessage, ...messages];
     const llmReply = new Subject<LLMReply>();
@@ -64,17 +60,17 @@ export class WebllmService implements LLMService {
 
     this.#worker = worker;
     this.#engine = engine;
-    this.#progressReport.update((report) => ({
-      ...report,
-      hasEngine: this.hasEngine,
+    this.#progressReport.update((currentReport) => ({
+      ...currentReport,
+      hasEngine: Boolean(engine),
     }));
   }
 
   #onNewReport(report: InitProgressReport): void {
-    this.#progressReport.set({
+    this.#progressReport.update((currentReport) => ({
+      ...currentReport,
       ...report,
-      hasEngine: this.hasEngine,
-    });
+    }));
   }
 
   async #chatCompletionReplay(messages: Messages, llmReply: Subject<LLMReply>) {
