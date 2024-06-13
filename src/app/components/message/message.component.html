@@ -9,6 +9,10 @@
     </div>
   </div>
   <div class="chat-bubble" [class.chat-bubble-primary]="isUser()">
-    <pre class="whitespace-break-spaces">{{ message().content }}</pre>
+    @if(hasMessage()){
+    <pre>{{ message().content }}</pre>
+    } @else {
+    <span class="loading loading-dots loading-sm"></span>
+    }
   </div>
 </article>

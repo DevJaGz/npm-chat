@@ -17,6 +17,7 @@ import { Message } from '@models';
 })
 export class MessageComponent {
   message = input.required<Message>();
+  hasMessage = computed(() => Boolean(this.message().content));
   isUser = computed(() => this.message().role === 'user');
   image = computed(() => (this.isUser() ? '/thunder.webp' : '/bot.webp'));
 }
