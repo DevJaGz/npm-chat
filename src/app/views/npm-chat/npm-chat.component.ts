@@ -24,8 +24,8 @@ export class NpmChatComponent {
   constructor() {
     effect(
       () => {
-        const report = this.#webllm.progressReport();
-        this.#store.setLlmReport(report);
+        const llmReport = this.#webllm.llmReport();
+        this.#store.setLlmReport(llmReport);
       },
       {
         allowSignalWrites: true,

@@ -1,1 +1,1 @@
-export * from './llm-report.model';
+export * from './llm.model';

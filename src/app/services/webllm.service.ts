@@ -1,14 +1,15 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, Signal, signal } from '@angular/core';
 import {
   InitProgressReport,
   CreateWebWorkerMLCEngine,
   WebWorkerMLCEngine,
 } from '@mlc-ai/web-llm';
+import { LLMReport, LLMService } from '../models/llm.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class WebllmService {
+export class WebllmService implements LLMService {
   readonly #modelId = 'TinyLlama-1.1B-Chat-v0.4-q4f32_1-MLC-1k';
   readonly #progressReport = signal<InitProgressReport>({
     progress: 0,
@@ -18,15 +19,9 @@ export class WebllmService {
 
   worker!: Worker;
   engine!: WebWorkerMLCEngine;
-  progressReport = this.#progressReport.asReadonly();
+  llmReport: Signal<LLMReport> = this.#progressReport.asReadonly();
 
   constructor() {
-    const hasWorkersSupport = navigator && 'serviceWorker' in navigator;
-
-    if (!hasWorkersSupport) {
-      throw new Error('Service Worker is not supported in this browser');
-    }
-
     this.#initialize();
   }
 
