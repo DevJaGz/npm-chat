@@ -1,9 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
+  computed,
   effect,
   inject,
   untracked,
+  viewChild,
 } from '@angular/core';
 import {
   LlmProgressComponent,

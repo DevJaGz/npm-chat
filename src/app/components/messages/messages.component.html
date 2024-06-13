@@ -1,8 +1,7 @@
-@if (isLlmLoaded()) {
-<div class="flex flex-col justify-end h-full">
-  @for (message of messages(); track message.id) {
-  <app-message [message]="message" />
-  }
-</div>
-
-}
+<section #scrollContainerRef class="h-[calc(100svh-5rem)] overflow-y-auto">
+  <div class="flex flex-col gap-2 justify-end min-h-full p-4">
+    @for (message of messages(); track message.id) {
+    <app-message [message]="message" />
+    }
+  </div>
+</section>
