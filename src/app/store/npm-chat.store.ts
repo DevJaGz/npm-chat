@@ -1,4 +1,4 @@
-import { Injectable, WritableSignal, signal } from '@angular/core';
+import { Injectable, WritableSignal, computed, signal } from '@angular/core';
 import { LLMReport, Message } from '@models';
 
 export interface NpmChatState {
@@ -24,6 +24,8 @@ export class NpmChatStore {
   readonly selectState = this.#state.asReadonly();
   readonly selectLlmReport = this.selectState().llmReport.asReadonly();
   readonly selectMessages = this.selectState().messages.asReadonly();
+
+  readonly isLlmLoaded = computed(() => this.selectLlmReport().progress === 1);
 
   setLlmReport(value: LLMReport): void {
     const state = this.#state().llmReport;

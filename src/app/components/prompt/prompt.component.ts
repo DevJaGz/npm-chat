@@ -7,6 +7,7 @@ import {
   signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { WebllmService } from '@services';
 import { NpmChatStore } from '@store';
 
 @Component({
@@ -18,10 +19,13 @@ import { NpmChatStore } from '@store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PromptComponent {
+  readonly #webllmService = inject(WebllmService);
   readonly #npmChatStore = inject(NpmChatStore);
   readonly #renderer = inject(Renderer2);
+
   message = signal('');
   hasMessage = computed(() => this.message() !== '');
+  isLlmLoaded = this.#npmChatStore.isLlmLoaded;
 
   onMessageChange($textarea: HTMLTextAreaElement, value: string): void {
     this.message.set(value);
@@ -34,7 +38,7 @@ export class PromptComponent {
     event.preventDefault();
     this.#npmChatStore.addMessage({
       role: 'user',
-      value: this.message(),
+      content: this.message(),
     });
     this.message.set('');
   }

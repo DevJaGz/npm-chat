@@ -5,6 +5,7 @@ import {
   WebWorkerMLCEngine,
 } from '@mlc-ai/web-llm';
 import { LLMReport, LLMService } from '../models/llm.model';
+import { Message, Messages } from '../models/chat.model';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,30 @@ export class WebllmService implements LLMService {
   worker!: Worker;
   engine!: WebWorkerMLCEngine;
   llmReport: Signal<LLMReport> = this.#progressReport.asReadonly();
+
+  async getChatCompletionStream(messages: Messages) {
+    const systemMessage: Message = {
+      role: 'system',
+      content: 'You are a helpful assistant.',
+    };
+    const newMessages = [systemMessage, ...messages];
+
+    const chunks = await this.engine.chat.completions.create({
+      messages: newMessages,
+      temperature: 1,
+      stream: true,
+      stream_options: { include_usage: true },
+    });
+
+    let reply = '';
+    for await (const chunk of chunks) {
+      reply += chunk.choices[0]?.delta.content || '';
+      console.log(reply);
+      if (chunk.usage) {
+        console.log(chunk.usage); // only last chunk has usage
+      }
+    }
+  }
 
   constructor() {
     this.#initialize();

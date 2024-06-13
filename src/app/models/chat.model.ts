@@ -1,5 +1,7 @@
 export interface Message {
   id?: string;
-  value: string;
-  role: 'user' | 'assistant';
+  content: string;
+  role: 'user' | 'system' | 'assistant';
 }
+
+export type Messages = Message[];
