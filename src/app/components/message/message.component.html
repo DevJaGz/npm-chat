@@ -3,7 +3,7 @@
   [class.chat-start]="!isUser()"
   [class.chat-end]="isUser()"
 >
-  <div class="chat-bubble">
+  <div class="chat-bubble" [class.chat-bubble-primary]="isUser()">
     <pre>{{ message().value }}</pre>
   </div>
 </article>
