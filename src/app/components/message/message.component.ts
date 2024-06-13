@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+} from '@angular/core';
 import { Message } from '@models';
 
 @Component({
@@ -11,4 +16,5 @@ import { Message } from '@models';
 })
 export class MessageComponent {
   message = input.required<Message>();
+  isUser = computed(() => this.message().role === 'user');
 }
