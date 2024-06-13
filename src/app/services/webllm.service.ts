@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import {
   InitProgressReport,
   CreateWebWorkerMLCEngine,
@@ -10,8 +10,15 @@ import {
 })
 export class WebllmService {
   readonly #modelId = 'TinyLlama-1.1B-Chat-v0.4-q4f32_1-MLC-1k';
+  readonly #progressReport = signal<InitProgressReport>({
+    progress: 0,
+    text: '',
+    timeElapsed: 0,
+  });
+
   worker!: Worker;
   engine!: WebWorkerMLCEngine;
+  progressReport = this.#progressReport.asReadonly();
 
   constructor() {
     const hasWorkersSupport = navigator && 'serviceWorker' in navigator;
@@ -38,6 +45,6 @@ export class WebllmService {
   }
 
   #onNewReport(report: InitProgressReport): void {
-    console.log('report', report);
+    this.#progressReport.set(report);
   }
 }
