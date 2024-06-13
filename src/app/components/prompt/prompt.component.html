@@ -1,11 +1,11 @@
 <div class="flex gap-2 items-center relative">
   <textarea
-    #textareaRef
     rows="1"
-    [ngModel]="message()"
-    (ngModelChange)="onMessageChange(textareaRef, $event)"
     class="textarea textarea-bordered flex-1 max-h-48 resize-none rounded-3xl pr-10"
     placeholder="Message NPM Chat"
+    #textareaRef
+    [ngModel]="message()"
+    (ngModelChange)="onMessageChange(textareaRef, $event)"
     (keydown.enter)="submitMessage($event)"
   ></textarea>
   <button
