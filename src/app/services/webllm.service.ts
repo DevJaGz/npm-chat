@@ -11,26 +11,35 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class WebllmService implements LLMService {
-  // readonly #modelId = 'Hermes-2-Pro-Llama-3-8B-q4f32_1-MLC'; // ✅
-  readonly #modelId = 'gemma-2b-it-q4f16_1-MLC-1k'; // ✅
-  // readonly #modelId = 'Phi-3-mini-4k-instruct-q4f16_1-MLC-1k'; // ❌
-  // readonly #modelId = 'TinyLlama-1.1B-Chat-v1.0-q4f16_1-MLC'; // ❌
-  // readonly #modelId = 'TinyLlama-1.1B-Chat-v1.0-q4f32_1-MLC'; // ❌
+  // readonly #modelId = 'Hermes-2-Pro-Llama-3-8B-q4f32_1-MLC'; // ✅ Very Delayed Download
+  // readonly #modelId = 'NeuralHermes-2.5-Mistral-7B-q4f16_1-MLC'; // ✅ Very Delayed Download
+  // readonly #modelId = 'WizardMath-7B-V1.1-q4f16_1-MLC'; // ❌ Very Delayed Download
+  // readonly #modelId = 'gemma-2b-it-q4f16_1-MLC-1k'; // ❌  relative Delayed Download
+  readonly #modelId = 'Qwen2-0.5B-Instruct-q0f16-MLC'; // ✅ relative Delayed Download
+  // readonly #modelId = 'Qwen2-1.5B-Instruct-q4f16_1-MLC'; // ❌ relative Delayed Download
+  // readonly #modelId = 'Phi-3-mini-4k-instruct-q4f16_1-MLC-1k'; // ❌ Delayed Download
+  // readonly #modelId = 'TinyLlama-1.1B-Chat-v1.0-q4f16_1-MLC'; // ❌ Delayed Download
+  // readonly #modelId = 'TinyLlama-1.1B-Chat-v1.0-q4f32_1-MLC'; // ❌ Delayed Download
   readonly #systemMessage: Message = {
     role: 'system',
     content:
       'You are a helpful assistant. The language of your responses should match the language used by the user. Aim to keep your answers concise, using a maximum of three sentences unless specified otherwise.',
   };
-  readonly #progressReport = signal<InitProgressReport>({
+  readonly #progressReport = signal<LLMReport>({
     progress: 0,
     text: '',
     timeElapsed: 0,
+    hasEngine: false,
   });
 
   #worker!: Worker;
   #engine!: WebWorkerMLCEngine;
 
   llmReport: Signal<LLMReport> = this.#progressReport.asReadonly();
+
+  get hasEngine(): boolean {
+    return Boolean(this.#engine);
+  }
 
   getChatReply(messages: Messages): Observable<LLMReply> {
     const newMessages = [this.#systemMessage, ...messages];
@@ -55,10 +64,17 @@ export class WebllmService implements LLMService {
 
     this.#worker = worker;
     this.#engine = engine;
+    this.#progressReport.update((report) => ({
+      ...report,
+      hasEngine: this.hasEngine,
+    }));
   }
 
   #onNewReport(report: InitProgressReport): void {
-    this.#progressReport.set(report);
+    this.#progressReport.set({
+      ...report,
+      hasEngine: this.hasEngine,
+    });
   }
 
   async #chatCompletionReplay(messages: Messages, llmReply: Subject<LLMReply>) {

@@ -6,6 +6,7 @@ export interface LLMReport {
   progress: number;
   text: string;
   timeElapsed: number;
+  hasEngine: boolean;
 }
 
 export interface LLMService {

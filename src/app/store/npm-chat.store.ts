@@ -13,6 +13,7 @@ export const InitialNpmChatState = signal<NpmChatState>({
     progress: 0,
     text: '',
     timeElapsed: 0,
+    hasEngine: false,
   }),
   messages: signal<Messages>([]),
 });
@@ -25,7 +26,11 @@ export class NpmChatStore {
   readonly selectLlmReport = this.selectState().llmReport.asReadonly();
   readonly selectMessages = this.selectState().messages.asReadonly();
 
-  readonly isLlmLoaded = computed(() => this.selectLlmReport().progress === 1);
+  readonly isLlmLoaded = computed(() =>
+    Boolean(
+      this.selectLlmReport().progress === 1 && this.selectLlmReport().hasEngine
+    )
+  );
 
   setLlmReport(value: LLMReport): void {
     const state = this.#state().llmReport;
