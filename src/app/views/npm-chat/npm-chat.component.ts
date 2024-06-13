@@ -3,6 +3,7 @@ import {
   Component,
   effect,
   inject,
+  untracked,
 } from '@angular/core';
 import { MessagesComponent, PromptComponent } from '@components';
 import { WebllmService } from '@services';
@@ -22,14 +23,11 @@ export class NpmChatComponent {
   readonly #npmChatStore = inject(NpmChatStore);
 
   constructor() {
-    effect(
-      () => {
-        const llmReport = this.#webllmService.llmReport();
+    effect(() => {
+      const llmReport = this.#webllmService.llmReport();
+      untracked(() => {
         this.#npmChatStore.setLlmReport(llmReport);
-      },
-      {
-        allowSignalWrites: true,
-      }
-    );
+      });
+    });
   }
 }
