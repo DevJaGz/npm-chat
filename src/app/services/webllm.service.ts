@@ -11,7 +11,7 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class WebllmService implements LLMService {
-  readonly #modelId = 'TinyLlama-1.1B-Chat-v0.4-q4f32_1-MLC-1k';
+  readonly #modelId = 'Llama-3-8B-Instruct-q4f32_1-MLC-1k';
   readonly #systemMessage: Message = {
     role: 'system',
     content:
