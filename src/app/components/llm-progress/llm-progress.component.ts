@@ -17,5 +17,4 @@ import { NpmChatStore } from '@store';
 export class LlmProgressComponent {
   readonly #npmChatStore = inject(NpmChatStore);
   llmReport = this.#npmChatStore.selectLlmReport;
-  isLlmLoaded = this.#npmChatStore.isLlmLoaded;
 }

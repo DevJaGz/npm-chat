@@ -25,6 +25,7 @@ import { NpmChatStore } from '@store';
 export class NpmChatComponent {
   readonly #webllmService = inject(WebllmService);
   readonly #npmChatStore = inject(NpmChatStore);
+  isLlmLoaded = this.#npmChatStore.isLlmLoaded;
 
   constructor() {
     effect(() => {

@@ -12,5 +12,6 @@ import { MessageComponent } from '../message/message.component';
 })
 export class MessagesComponent {
   readonly #npmChatStore = inject(NpmChatStore);
+  isLlmLoaded = this.#npmChatStore.isLlmLoaded;
   messages = this.#npmChatStore.selectMessages;
 }
