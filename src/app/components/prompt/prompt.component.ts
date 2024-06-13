@@ -28,7 +28,8 @@ export class PromptComponent {
     this.#renderer.setStyle($textarea, 'height', `${textAreaHeight}px`);
   }
 
-  submitMessage(): void {
+  submitMessage(event: Event): void {
+    event.preventDefault();
     console.log(this.message());
   }
 }

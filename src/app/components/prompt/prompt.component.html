@@ -6,12 +6,13 @@
     (ngModelChange)="onMessageChange(textareaRef, $event)"
     class="textarea textarea-bordered flex-1 max-h-48 resize-none rounded-3xl pr-10"
     placeholder="Message NPM Chat"
+    (keydown.enter)="submitMessage($event)"
   ></textarea>
   <button
     class="btn btn-circle btn-sm absolute bottom-2 right-2"
     [class.pointer-events-none]="!hasMessage()"
     [class.btn-primary]="hasMessage()"
-    (click)="submitMessage()"
+    (click)="submitMessage($event)"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
