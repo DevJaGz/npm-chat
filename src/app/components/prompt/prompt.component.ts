@@ -54,7 +54,7 @@ export class PromptComponent {
     const currentMessages = this.#npmChatStore.selectMessages();
     const assistantMessage = this.#npmChatStore.addMessage({
       role: 'assistant',
-      content: '',
+      content: '...',
     });
 
     this.#webllmService.getChatReply(currentMessages).subscribe({
