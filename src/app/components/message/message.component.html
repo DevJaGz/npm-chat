@@ -3,6 +3,11 @@
   [class.chat-start]="!isUser()"
   [class.chat-end]="isUser()"
 >
+  <div class="chat-image avatar">
+    <div class="w-10 rounded-full">
+      <img alt="Chat bubble" width="40" height="40" [ngSrc]="image()" />
+    </div>
+  </div>
   <div class="chat-bubble" [class.chat-bubble-primary]="isUser()">
     <pre class="whitespace-break-spaces">{{ message().content }}</pre>
   </div>

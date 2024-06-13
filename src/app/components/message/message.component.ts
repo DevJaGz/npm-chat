@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,7 +10,7 @@ import { Message } from '@models';
 @Component({
   selector: 'app-message',
   standalone: true,
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './message.component.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,4 +18,5 @@ import { Message } from '@models';
 export class MessageComponent {
   message = input.required<Message>();
   isUser = computed(() => this.message().role === 'user');
+  image = computed(() => (this.isUser() ? '/thunder.webp' : '/bot.webp'));
 }
