@@ -25,25 +25,23 @@ export class MessagesComponent {
   readonly #npmChatStore = inject(NpmChatStore);
   messages = this.#npmChatStore.selectMessages;
   messageCount = this.#npmChatStore.selectMessageCount;
-  messagesCount = 0;
-  scrollContainerRef =
-    viewChild<ElementRef<HTMLDivElement>>('scrollContainerRef');
-  scrollContainer = computed(() => this.scrollContainerRef()?.nativeElement);
+  scrollableRef = viewChild<ElementRef<HTMLDivElement>>('scrollableRef');
+  scrollable = computed(() => this.scrollableRef()?.nativeElement);
 
   constructor() {
     effect(() => {
       const messageCount = this.messageCount();
-      const scrollContainer = untracked(this.scrollContainer);
-      if (messageCount > 0 && scrollContainer) {
-        this.#scrollToBottomNextTick(scrollContainer);
+      const scrollable = untracked(this.scrollable);
+      if (messageCount > 0 && scrollable) {
+        this.#scrollToBottomNextTick(scrollable);
       }
     });
   }
 
-  #scrollToBottomNextTick(scrollContainer: HTMLDivElement) {
+  #scrollToBottomNextTick(scrollable: HTMLDivElement) {
     setTimeout(() => {
-      const scrollHeight = scrollContainer.scrollHeight;
-      this.#renderer.setProperty(scrollContainer, 'scrollTop', scrollHeight);
+      const scrollHeight = scrollable.scrollHeight;
+      this.#renderer.setProperty(scrollable, 'scrollTop', scrollHeight);
     }, 0);
   }
 }

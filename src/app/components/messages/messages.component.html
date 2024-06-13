@@ -1,4 +1,4 @@
-<section #scrollContainerRef class="h-[calc(100svh-5rem)] overflow-y-auto">
+<section #scrollableRef class="h-[calc(100svh-5rem)] overflow-y-auto">
   <div class="flex flex-col gap-2 justify-end min-h-full p-4">
     @for (message of messages(); track message.id) {
     <app-message [message]="message" />
