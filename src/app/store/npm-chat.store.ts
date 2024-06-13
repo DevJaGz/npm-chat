@@ -1,9 +1,9 @@
 import { Injectable, WritableSignal, computed, signal } from '@angular/core';
-import { LLMReport, Message } from '@models';
+import { LLMReport, Message, Messages } from '@models';
 
 export interface NpmChatState {
   llmReport: WritableSignal<LLMReport>;
-  messages: WritableSignal<MessageState[]>;
+  messages: WritableSignal<Messages>;
 }
 
 export type MessageState = WritableSignal<Message>;
@@ -14,7 +14,7 @@ export const InitialNpmChatState = signal<NpmChatState>({
     text: '',
     timeElapsed: 0,
   }),
-  messages: signal<MessageState[]>([]),
+  messages: signal<Messages>([]),
 });
 
 @Injectable()
@@ -32,27 +32,29 @@ export class NpmChatStore {
     state.set(value);
   }
 
-  addMessage(value: Message): void {
+  addMessage(value: Message): Message {
     const state = this.#state().messages;
+    let newMessage = value;
     state.update((messages) => {
-      const newMessage = signal({
+      newMessage = {
         ...value,
         id: crypto.randomUUID(),
-      });
+      };
       return [...messages, newMessage];
     });
+
+    return newMessage;
   }
 
   setMessage(value: Message): void {
     const state = this.#state().messages;
     state.update((messages) => {
-      const index = messages.findIndex((message) => message().id === value.id);
+      const index = messages.findIndex((message) => message.id === value.id);
       if (index === -1) {
         console.warn(`Message ${value.id} not found for update`);
         return messages;
       }
-      const message = messages[index];
-      message.set(value);
+      messages[index] = value;
       return [...messages];
     });
   }

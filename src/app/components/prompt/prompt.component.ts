@@ -9,6 +9,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import { WebllmService } from '@services';
 import { NpmChatStore } from '@store';
+import { Message } from '../../models/chat.model';
 
 @Component({
   selector: 'app-prompt',
@@ -36,18 +37,38 @@ export class PromptComponent {
 
   submitMessage(event: Event): void {
     event.preventDefault();
+    this.#addUserMessage();
+    this.message.set('');
+    this.#handleChatReply();
+  }
+
+  #addUserMessage(): void {
     const message = this.message();
     this.#npmChatStore.addMessage({
       role: 'user',
       content: message,
     });
-    this.message.set('');
-    const messages = this.#npmChatStore.selectMessages().map((message) => {
-      return {
-        ...message(),
-        content: message().content,
-      };
+  }
+
+  #handleChatReply(): void {
+    const currentMessages = this.#npmChatStore.selectMessages();
+    const assistantMessage = this.#npmChatStore.addMessage({
+      role: 'assistant',
+      content: '',
     });
-    this.#webllmService.getChatCompletionStream(messages);
+
+    this.#webllmService.getChatReply(currentMessages).subscribe({
+      next: (llmReply) => {
+        const usage = llmReply.usage;
+        const newMessage: Message = {
+          ...assistantMessage,
+          content: llmReply.content,
+        };
+        this.#npmChatStore.setMessage(newMessage);
+        if (usage) {
+          console.log(usage);
+        }
+      },
+    });
   }
 }
