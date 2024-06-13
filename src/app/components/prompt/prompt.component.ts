@@ -7,6 +7,7 @@ import {
   signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { NpmChatStore } from '@store';
 
 @Component({
   selector: 'app-prompt',
@@ -17,6 +18,7 @@ import { FormsModule } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PromptComponent {
+  readonly #npmChatStore = inject(NpmChatStore);
   readonly #renderer = inject(Renderer2);
   message = signal('');
   hasMessage = computed(() => this.message() !== '');
@@ -30,6 +32,5 @@ export class PromptComponent {
 
   submitMessage(event: Event): void {
     event.preventDefault();
-    console.log(this.message());
   }
 }
