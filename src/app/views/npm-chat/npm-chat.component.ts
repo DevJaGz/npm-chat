@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MessagesComponent, PromptComponent } from '@components';
+import { WebllmService } from '@services';
 
 @Component({
   selector: 'app-npm-chat',
@@ -9,4 +10,6 @@ import { MessagesComponent, PromptComponent } from '@components';
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NpmChatComponent {}
+export class NpmChatComponent {
+  readonly #webllm = inject(WebllmService);
+}
