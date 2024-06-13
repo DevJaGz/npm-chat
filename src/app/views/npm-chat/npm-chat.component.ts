@@ -18,14 +18,14 @@ import { NpmChatStore } from '@store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NpmChatComponent {
-  readonly #webllm = inject(WebllmService);
-  readonly #store = inject(NpmChatStore);
+  readonly #webllmService = inject(WebllmService);
+  readonly #npmChatStore = inject(NpmChatStore);
 
   constructor() {
     effect(
       () => {
-        const llmReport = this.#webllm.llmReport();
-        this.#store.setLlmReport(llmReport);
+        const llmReport = this.#webllmService.llmReport();
+        this.#npmChatStore.setLlmReport(llmReport);
       },
       {
         allowSignalWrites: true,
