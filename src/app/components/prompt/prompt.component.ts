@@ -32,5 +32,10 @@ export class PromptComponent {
 
   submitMessage(event: Event): void {
     event.preventDefault();
+    this.#npmChatStore.addMessage({
+      role: 'user',
+      value: this.message(),
+    });
+    this.message.set('');
   }
 }

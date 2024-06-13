@@ -33,7 +33,10 @@ export class NpmChatStore {
   addMessage(value: Message): void {
     const state = this.#state().messages;
     state.update((messages) => {
-      const newMessage = signal(value);
+      const newMessage = signal({
+        ...value,
+        id: crypto.randomUUID(),
+      });
       return [...messages, newMessage];
     });
   }
@@ -41,16 +44,14 @@ export class NpmChatStore {
   setMessage(value: Message): void {
     const state = this.#state().messages;
     state.update((messages) => {
-      const index = messages.findIndex(
-        (message) => message().index === value.index
-      );
+      const index = messages.findIndex((message) => message().id === value.id);
       if (index === -1) {
-        console.warn(`Message ${value.index} not found for update`);
+        console.warn(`Message ${value.id} not found for update`);
         return messages;
       }
       const message = messages[index];
       message.set(value);
-      return [...messages, message];
+      return [...messages];
     });
   }
 }
