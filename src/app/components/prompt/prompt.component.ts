@@ -36,10 +36,18 @@ export class PromptComponent {
 
   submitMessage(event: Event): void {
     event.preventDefault();
+    const message = this.message();
     this.#npmChatStore.addMessage({
       role: 'user',
-      content: this.message(),
+      content: message,
     });
     this.message.set('');
+    const messages = this.#npmChatStore.selectMessages().map((message) => {
+      return {
+        ...message(),
+        content: message().content,
+      };
+    });
+    this.#webllmService.getChatCompletionStream(messages);
   }
 }
