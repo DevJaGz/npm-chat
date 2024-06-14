@@ -26,7 +26,8 @@
       "@services": ["./src/app/services"],
       "@services/*": ["./src/app/services/*"],
       "@store": ["./src/app/store"],
-      "@models": ["./src/app/models"]
+      "@models": ["./src/app/models"],
+      "@constants": ["./src/app/constants"]
     }
   },
   "angularCompilerOptions": {

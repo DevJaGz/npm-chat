@@ -11,6 +11,7 @@ import { WebllmService } from '@services';
 import { NpmChatStore } from '@store';
 import { Message } from '../../models/chat.model';
 import { CompletionUsage } from '@models';
+import { APP_NAME } from '@constants';
 
 @Component({
   selector: 'app-prompt',
@@ -29,6 +30,7 @@ export class PromptComponent {
   hasMessage = computed(() => this.message() !== '');
   isLlmLoaded = this.#npmChatStore.isLlmLoaded;
   isLlmBusy = this.#npmChatStore.selectIsBusy;
+  promptPLaceholder = `Message ${APP_NAME}`;
 
   onMessageChange($textarea: HTMLTextAreaElement, value: string): void {
     this.message.set(value);

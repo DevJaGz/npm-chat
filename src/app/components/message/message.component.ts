@@ -7,6 +7,7 @@ import {
   input,
   untracked,
 } from '@angular/core';
+import { APP_NAME } from '@constants';
 import { Message } from '@models';
 import { NpmChatStore } from '@store';
 
@@ -26,7 +27,7 @@ export class MessageComponent {
   hasMessage = computed(() => Boolean(this.message().content));
   isUser = computed(() => this.message().role === 'user');
   image = computed(() => (this.isUser() ? '/thunder.webp' : '/bot.webp'));
-  sender = computed(() => (this.isUser() ? 'You' : 'NPM Chat'));
+  sender = computed(() => (this.isUser() ? 'You' : APP_NAME));
   tokens = computed(() => {
     const tokens = this.message().tokens;
 

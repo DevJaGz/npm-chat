@@ -5,6 +5,7 @@ import {
   inject,
   untracked,
 } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import {
   LlmProgressComponent,
   MessagesComponent,
@@ -12,6 +13,7 @@ import {
 } from '@components';
 import { WebllmService } from '@services';
 import { NpmChatStore } from '@store';
+import { APP_NAME } from '@constants';
 
 @Component({
   selector: 'app-npm-chat',
@@ -26,10 +28,13 @@ export class NpmChatComponent {
   readonly #webllmService = inject(WebllmService);
   readonly #npmChatStore = inject(NpmChatStore);
   readonly #systemMessage = this.#npmChatStore.selectSystemMessage;
+  // Change app title name
+  readonly #title = inject(Title);
 
   isLlmLoaded = this.#npmChatStore.isLlmLoaded;
 
   constructor() {
+    this.#title.setTitle(APP_NAME);
     this.#webllmService.initialize(this.#systemMessage());
     effect(() => {
       const llmReport = this.#webllmService.llmReport();

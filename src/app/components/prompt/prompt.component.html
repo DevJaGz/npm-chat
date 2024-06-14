@@ -4,7 +4,7 @@
     <textarea
       rows="1"
       class="textarea textarea-bordered flex-1 min-h-12 max-h-48 resize-none rounded-3xl pr-10"
-      placeholder="Message NPM Chat"
+      [placeholder]="promptPLaceholder"
       #textareaRef
       [ngModel]="message()"
       (ngModelChange)="onMessageChange(textareaRef, $event)"
