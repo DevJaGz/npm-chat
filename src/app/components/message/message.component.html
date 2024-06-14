@@ -10,14 +10,14 @@
   </div>
   <div class="chat-header">
     {{ sender() }}
-    <time class="text-xs opacity-50">12:45</time>
+    <time class="text-xs opacity-50">{{ time() | date : "shortTime" }}</time>
   </div>
   <div class="chat-bubble" [class.chat-bubble-primary]="isUser()">
     @if(hasMessage()){
-    <pre class="whitespace-break-spaces">{{ message().content }}</pre>
+    <pre class="whitespace-break-spaces">{{ content() }}</pre>
     } @else {
     <span class="loading loading-dots loading-sm"></span>
     }
   </div>
-  <div class="chat-footer opacity-50">Delivered</div>
+  <div class="chat-footer opacity-50">{{ tokens() }}</div>
 </article>

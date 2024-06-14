@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { WebllmService } from '@services';
 import { NpmChatStore } from '@store';
 import { Message } from '../../models/chat.model';
+import { CompletionUsage } from '@models';
 
 @Component({
   selector: 'app-prompt',
@@ -47,6 +48,8 @@ export class PromptComponent {
     this.#npmChatStore.addMessage({
       role: 'user',
       content: message,
+      createdAt: Date.now(),
+      tokens: null,
     });
   }
 
@@ -55,6 +58,8 @@ export class PromptComponent {
     const assistantMessage = this.#npmChatStore.addMessage({
       role: 'assistant',
       content: '',
+      createdAt: Date.now(),
+      tokens: null,
     });
 
     this.#webllmService.getChatReply(currentMessages).subscribe({
@@ -66,9 +71,26 @@ export class PromptComponent {
         };
         this.#npmChatStore.setMessage(newMessage);
         if (usage) {
-          console.log(usage);
+          this.#updateMessageTokens(usage);
         }
       },
+    });
+  }
+
+  #updateMessageTokens(usage: CompletionUsage): void {
+    const messages = this.#npmChatStore.selectMessages();
+    const [secondLast, last] = messages.slice(-2);
+    const lastTokens = usage.completionTokens;
+    const secondLastTokens = usage.promptTokens;
+
+    this.#npmChatStore.setMessage({
+      ...last,
+      tokens: lastTokens,
+    });
+
+    this.#npmChatStore.setMessage({
+      ...secondLast,
+      tokens: secondLastTokens,
     });
   }
 }
