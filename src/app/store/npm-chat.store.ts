@@ -13,6 +13,7 @@ export interface NpmChatState {
   systemMessage: WritableSignal<Message>;
   messages: WritableSignal<Messages>;
   messageCount: WritableSignal<number>;
+  isBusy: WritableSignal<boolean>;
 }
 
 export type MessageState = WritableSignal<Message>;
@@ -33,6 +34,7 @@ export const InitialNpmChatState = signal<NpmChatState>({
   }),
   messages: signal<Messages>([]),
   messageCount: signal<number>(0),
+  isBusy: signal<boolean>(false),
 });
 
 @Injectable()
@@ -44,6 +46,7 @@ export class NpmChatStore {
   readonly selectMessages = this.selectState().messages.asReadonly();
   readonly selectMessageCount = this.selectState().messageCount.asReadonly();
   readonly selectSystemMessage = this.selectState().systemMessage.asReadonly();
+  readonly selectIsBusy = this.selectState().isBusy.asReadonly();
 
   readonly isLlmLoaded = computed(() =>
     Boolean(
@@ -95,6 +98,11 @@ export class NpmChatStore {
       messages[index] = value;
       return [...messages];
     });
+  }
+
+  setIsBusy(value: boolean): void {
+    const state = this.#state().isBusy;
+    state.set(value);
   }
 
   #setMessageCount(value: number): void {

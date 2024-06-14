@@ -28,6 +28,7 @@ export class PromptComponent {
   message = signal('');
   hasMessage = computed(() => this.message() !== '');
   isLlmLoaded = this.#npmChatStore.isLlmLoaded;
+  isLlmBusy = this.#npmChatStore.selectIsBusy;
 
   onMessageChange($textarea: HTMLTextAreaElement, value: string): void {
     this.message.set(value);
@@ -62,6 +63,7 @@ export class PromptComponent {
       tokens: null,
     });
 
+    this.#npmChatStore.setIsBusy(true);
     this.#webllmService.getChatReply(currentMessages).subscribe({
       next: (llmReply) => {
         const usage = llmReply.usage;
@@ -72,6 +74,7 @@ export class PromptComponent {
         this.#npmChatStore.setMessage(newMessage);
         if (usage) {
           this.#updateMessageTokens(usage);
+          this.#npmChatStore.setIsBusy(false);
         }
       },
     });
