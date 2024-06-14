@@ -90,7 +90,7 @@ export class PromptComponent {
 
     this.#npmChatStore.setMessage({
       ...secondLastMessage,
-      tokens: secondLastMessageTokens - lastMessageTokens,
+      tokens: secondLastMessageTokens,
     });
   }
 }

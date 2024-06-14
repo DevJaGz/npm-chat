@@ -25,7 +25,7 @@ export const InitialNpmChatState = signal<NpmChatState>({
     hasEngine: false,
   }),
   systemMessage: signal<Message>({
-    tokens: 41,
+    tokens: 50,
     createdAt: Date.now(),
     role: 'system',
     content:

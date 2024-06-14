@@ -33,9 +33,15 @@ export class MessageComponent {
     const [firstMessage] = untracked(this.messages);
     const systemMessageTokens = systemMessage.tokens;
     const isFirstMessage = firstMessage.id === this.message().id;
+    const modifyTokensInFirstMessage =
+      systemMessageTokens &&
+      tokens &&
+      isFirstMessage &&
+      systemMessageTokens < tokens;
+
     let realTokens = tokens;
 
-    if (tokens && isFirstMessage && systemMessageTokens) {
+    if (modifyTokensInFirstMessage) {
       realTokens = tokens - systemMessageTokens;
     }
 
