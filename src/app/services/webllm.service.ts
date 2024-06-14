@@ -11,12 +11,12 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class WebllmService implements LLMService {
-  readonly #modelId = 'Llama-3-8B-Instruct-q4f32_1-MLC-1k'; // ✅ Very Delayed Download
+  // readonly #modelId = 'Llama-3-8B-Instruct-q4f32_1-MLC-1k'; // ✅ Very Delayed Download
   // readonly #modelId = 'Hermes-2-Pro-Llama-3-8B-q4f32_1-MLC'; // ✅ Very Delayed Download
   // readonly #modelId = 'NeuralHermes-2.5-Mistral-7B-q4f16_1-MLC'; // ✅ Very Delayed Download
   // readonly #modelId = 'WizardMath-7B-V1.1-q4f16_1-MLC'; // ❌ Very Delayed Download
   // readonly #modelId = 'gemma-2b-it-q4f16_1-MLC-1k'; // ❌  relative Delayed Download
-  // readonly #modelId = 'Qwen2-0.5B-Instruct-q0f16-MLC'; // ✅ relative Delayed Download
+  readonly #modelId = 'Qwen2-0.5B-Instruct-q0f16-MLC'; // ✅ relative Delayed Download
   // readonly #modelId = 'Qwen2-1.5B-Instruct-q4f16_1-MLC'; // ❌ relative Delayed Download
   // readonly #modelId = 'Phi-3-mini-4k-instruct-q4f16_1-MLC-1k'; // ❌ Delayed Download
   // readonly #modelId = 'TinyLlama-1.1B-Chat-v1.0-q4f16_1-MLC'; // ❌ Delayed Download
