@@ -19,5 +19,9 @@
     <span class="loading loading-dots loading-sm"></span>
     }
   </div>
-  <div class="chat-footer opacity-50">{{ tokens() }}</div>
+  <div class="chat-footer opacity-50">
+    @if (tokens()) {
+    {{ tokens() }}
+    } @else { calculating tokens... }
+  </div>
 </article>

@@ -51,7 +51,7 @@ export class MessageComponent {
       return '1 token used';
     }
 
-    return realTokens ? `${realTokens} tokens used` : '...';
+    return realTokens ? `${realTokens} tokens used` : '';
   });
   content = computed(() => this.message().content);
   time = computed(() => this.message().createdAt);
