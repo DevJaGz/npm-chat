@@ -79,18 +79,18 @@ export class PromptComponent {
 
   #updateMessageTokens(usage: CompletionUsage): void {
     const messages = this.#npmChatStore.selectMessages();
-    const [secondLast, last] = messages.slice(-2);
-    const lastTokens = usage.completionTokens;
-    const secondLastTokens = usage.promptTokens;
+    const [secondLastMessage, lastMessage] = messages.slice(-2);
+    const lastMessageTokens = usage.completionTokens;
+    const secondLastMessageTokens = usage.promptTokens;
 
     this.#npmChatStore.setMessage({
-      ...last,
-      tokens: lastTokens,
+      ...lastMessage,
+      tokens: lastMessageTokens,
     });
 
     this.#npmChatStore.setMessage({
-      ...secondLast,
-      tokens: secondLastTokens,
+      ...secondLastMessage,
+      tokens: secondLastMessageTokens - lastMessageTokens,
     });
   }
 }

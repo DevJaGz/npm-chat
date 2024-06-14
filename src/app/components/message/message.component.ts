@@ -34,9 +34,15 @@ export class MessageComponent {
     const systemMessageTokens = systemMessage.tokens;
     const isFirstMessage = firstMessage.id === this.message().id;
     let realTokens = tokens;
+
     if (tokens && isFirstMessage && systemMessageTokens) {
       realTokens = tokens - systemMessageTokens;
     }
+
+    if (realTokens === 1) {
+      return '1 token';
+    }
+
     return realTokens ? `${realTokens} tokens` : '...';
   });
   content = computed(() => this.message().content);
