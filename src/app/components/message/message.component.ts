@@ -29,6 +29,7 @@ export class MessageComponent {
   sender = computed(() => (this.isUser() ? 'You' : 'NPM Chat'));
   tokens = computed(() => {
     const tokens = this.message().tokens;
+
     const systemMessage = this.systemMessage();
     const [firstMessage] = untracked(this.messages);
     const systemMessageTokens = systemMessage.tokens;
