@@ -1,1 +1,1 @@
-export const APP_NAME = 'npmChat' as const;
+export const APP_NAME = 'Npm Chat' as const;
