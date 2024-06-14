@@ -25,9 +25,12 @@ import { NpmChatStore } from '@store';
 export class NpmChatComponent {
   readonly #webllmService = inject(WebllmService);
   readonly #npmChatStore = inject(NpmChatStore);
+  readonly #systemMessage = this.#npmChatStore.selectSystemMessage;
+
   isLlmLoaded = this.#npmChatStore.isLlmLoaded;
 
   constructor() {
+    this.#webllmService.initialize(this.#systemMessage());
     effect(() => {
       const llmReport = this.#webllmService.llmReport();
       untracked(() => {

@@ -3,9 +3,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   input,
+  untracked,
 } from '@angular/core';
 import { Message } from '@models';
+import { NpmChatStore } from '@store';
 
 @Component({
   selector: 'app-message',
@@ -16,6 +19,9 @@ import { Message } from '@models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MessageComponent {
+  readonly #npmChatStore = inject(NpmChatStore);
+  messages = this.#npmChatStore.selectMessages;
+  systemMessage = this.#npmChatStore.selectSystemMessage;
   message = input.required<Message>();
   hasMessage = computed(() => Boolean(this.message().content));
   isUser = computed(() => this.message().role === 'user');
@@ -23,8 +29,15 @@ export class MessageComponent {
   sender = computed(() => (this.isUser() ? 'You' : 'NPM Chat'));
   tokens = computed(() => {
     const tokens = this.message().tokens;
-    const isUser = this.isUser();
-    return tokens ? `${tokens} tokens` : '...';
+    const systemMessage = this.systemMessage();
+    const [firstMessage] = untracked(this.messages);
+    const systemMessageTokens = systemMessage.tokens;
+    const isFirstMessage = firstMessage.id === this.message().id;
+    let realTokens = tokens;
+    if (tokens && isFirstMessage && systemMessageTokens) {
+      realTokens = tokens - systemMessageTokens;
+    }
+    return realTokens ? `${realTokens} tokens` : '...';
   });
   content = computed(() => this.message().content);
   time = computed(() => this.message().createdAt);

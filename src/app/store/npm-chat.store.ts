@@ -10,6 +10,7 @@ import { LLMReport, Message, Messages } from '@models';
 
 export interface NpmChatState {
   llmReport: WritableSignal<LLMReport>;
+  systemMessage: WritableSignal<Message>;
   messages: WritableSignal<Messages>;
   messageCount: WritableSignal<number>;
 }
@@ -23,6 +24,13 @@ export const InitialNpmChatState = signal<NpmChatState>({
     timeElapsed: 0,
     hasEngine: false,
   }),
+  systemMessage: signal<Message>({
+    tokens: 50,
+    createdAt: Date.now(),
+    role: 'system',
+    content:
+      'You are a helpful assistant. The language of your responses should match the language used by the user. Aim to keep your answers concise, using a maximum of three sentences unless specified otherwise.',
+  }),
   messages: signal<Messages>([]),
   messageCount: signal<number>(0),
 });
@@ -35,6 +43,7 @@ export class NpmChatStore {
   readonly selectLlmReport = this.selectState().llmReport.asReadonly();
   readonly selectMessages = this.selectState().messages.asReadonly();
   readonly selectMessageCount = this.selectState().messageCount.asReadonly();
+  readonly selectSystemMessage = this.selectState().systemMessage.asReadonly();
 
   readonly isLlmLoaded = computed(() =>
     Boolean(

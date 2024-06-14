@@ -20,13 +20,7 @@ export class WebllmService implements LLMService {
   // readonly #modelId = 'Phi-3-mini-4k-instruct-q4f16_1-MLC-1k'; // ❌ Delayed Download
   // readonly #modelId = 'TinyLlama-1.1B-Chat-v1.0-q4f16_1-MLC'; // ❌ Delayed Download
   // readonly #modelId = 'TinyLlama-1.1B-Chat-v1.0-q4f32_1-MLC'; // ❌ Delayed Download
-  readonly #systemMessage: Message = {
-    tokens: null,
-    createdAt: Date.now(),
-    role: 'system',
-    content:
-      'You are a helpful assistant. The language of your responses should match the language used by the user. Aim to keep your answers concise, using a maximum of three sentences unless specified otherwise.',
-  };
+
   readonly #progressReport = signal<LLMReport>({
     progress: 0,
     text: '',
@@ -34,6 +28,7 @@ export class WebllmService implements LLMService {
     hasEngine: false,
   });
 
+  #systemMessage!: Message;
   #worker!: Worker;
   #engine!: WebWorkerMLCEngine;
 
@@ -46,7 +41,8 @@ export class WebllmService implements LLMService {
     return llmReply.asObservable();
   }
 
-  constructor() {
+  initialize(systemMessage: Message): void {
+    this.#systemMessage = systemMessage;
     this.#initialize();
   }
 

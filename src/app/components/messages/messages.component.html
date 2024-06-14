@@ -2,7 +2,7 @@
   <div
     class="flex flex-col gap-2 justify-end min-h-full p-4 mx-auto max-w-screen-lg"
   >
-    @for (message of messages(); track message.id) {
+    @for (message of messages(); track message.id; ) {
     <app-message [message]="message" />
     }
   </div>
