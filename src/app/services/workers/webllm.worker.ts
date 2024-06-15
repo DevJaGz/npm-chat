@@ -1,8 +1,7 @@
 /// <reference lib="webworker" />
-import { MLCEngine, MLCEngineWorkerHandler } from '@mlc-ai/web-llm';
+import { WebWorkerMLCEngineHandler } from '@mlc-ai/web-llm';
 
-const engine = new MLCEngine();
-const handler = new MLCEngineWorkerHandler(engine);
+const handler = new WebWorkerMLCEngineHandler();
 self.onmessage = (msg: MessageEvent) => {
   handler.onmessage(msg);
 };
