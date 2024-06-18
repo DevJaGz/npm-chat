@@ -20,7 +20,7 @@ export class TemplatesComponent {
     },
     {
       prompt:
-        'Suggest a simple dinner recipe for someone who is a beginner in cooking. Include basic ingredients and steps',
+        'Suggest a simple dinner recipe for someone who is a beginner in cooking. Include basic ingredients and steps as lists',
       label: 'Recipe Suggestion',
       icon: '🇫🇷',
     },
