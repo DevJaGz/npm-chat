@@ -3,8 +3,8 @@
 >
   <section #scrollable class="overflow-y-auto h-[calc(100vh-100px)] p-4">
     @if (!isLlmLoaded()) {
-    <div class="flex flex-col gap-48">
-      <app-llm-progress />
+    <app-llm-progress />
+    <div class="fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
       <app-chat-brand />
     </div>
     } @else { @if (hasMessages()) {
