@@ -1,5 +1,11 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+} from '@angular/core';
 import { Template } from '@models';
+import { NpmChatStore } from '@store';
 
 @Component({
   selector: 'app-template',
@@ -10,5 +16,10 @@ import { Template } from '@models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TemplateComponent {
+  readonly #npmChatStore = inject(NpmChatStore);
   template = input.required<Template>();
+
+  loadTemplate() {
+    this.#npmChatStore.newUserMessage(this.template().prompt);
+  }
 }

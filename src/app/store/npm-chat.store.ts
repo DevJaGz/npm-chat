@@ -3,10 +3,12 @@ import {
   WritableSignal,
   computed,
   effect,
+  inject,
   signal,
   untracked,
 } from '@angular/core';
-import { LLMReport, Message, Messages } from '@models';
+import { CompletionUsage, LLMReport, Message, Messages } from '@models';
+import { WebllmService } from '@services';
 
 export interface NpmChatState {
   llmReport: WritableSignal<LLMReport>;
@@ -39,6 +41,7 @@ export const InitialNpmChatState = signal<NpmChatState>({
 
 @Injectable()
 export class NpmChatStore {
+  readonly #webllmService = inject(WebllmService);
   readonly #state = InitialNpmChatState;
 
   readonly selectState = this.#state.asReadonly();
@@ -72,6 +75,17 @@ export class NpmChatStore {
   setLlmReport(value: LLMReport): void {
     const state = this.#state().llmReport;
     state.set(value);
+  }
+
+  newUserMessage(value: string): void {
+    const newMessage: Message = {
+      role: 'user',
+      content: value,
+      createdAt: Date.now(),
+      tokens: null,
+    };
+    this.addMessage(newMessage);
+    this.#handleChatReply();
   }
 
   addMessage(value: Message): Message {
@@ -109,5 +123,47 @@ export class NpmChatStore {
   #setMessageCount(value: number): void {
     const state = this.#state().messageCount;
     state.set(value);
+  }
+
+  #handleChatReply(): void {
+    const currentMessages = this.selectMessages();
+    const assistantMessage = this.addMessage({
+      role: 'assistant',
+      content: '',
+      createdAt: Date.now(),
+      tokens: null,
+    });
+    this.setIsBusy(true);
+    this.#webllmService.getChatReply(currentMessages).subscribe({
+      next: (llmReply) => {
+        const usage = llmReply.usage;
+        const newMessage: Message = {
+          ...assistantMessage,
+          content: llmReply.content,
+        };
+        this.setMessage(newMessage);
+        if (usage) {
+          this.#updateMessageTokens(usage);
+          this.setIsBusy(false);
+        }
+      },
+    });
+  }
+
+  #updateMessageTokens(usage: CompletionUsage): void {
+    const messages = this.selectMessages();
+    const [secondLastMessage, lastMessage] = messages.slice(-2);
+    const lastMessageTokens = usage.completionTokens;
+    const secondLastMessageTokens = usage.promptTokens;
+
+    this.setMessage({
+      ...lastMessage,
+      tokens: lastMessageTokens,
+    });
+
+    this.setMessage({
+      ...secondLastMessage,
+      tokens: secondLastMessageTokens,
+    });
   }
 }
