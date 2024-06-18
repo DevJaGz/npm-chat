@@ -25,6 +25,7 @@
       "@components": ["./src/app/components"],
       "@services": ["./src/app/services"],
       "@services/*": ["./src/app/services/*"],
+      "@directives": ["./src/app/directives"],
       "@store": ["./src/app/store"],
       "@models": ["./src/app/models"],
       "@constants": ["./src/app/constants"]

@@ -6,11 +6,12 @@ import {
 } from '@angular/core';
 import { Template } from '@models';
 import { NpmChatStore } from '@store';
+import { RenderSvgDirective } from '@directives';
 
 @Component({
   selector: 'app-template',
   standalone: true,
-  imports: [],
+  imports: [RenderSvgDirective],
   templateUrl: './template.component.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
