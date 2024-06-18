@@ -6,6 +6,7 @@ import {
   computed,
   effect,
   inject,
+  input,
   untracked,
   viewChild,
 } from '@angular/core';
@@ -25,8 +26,7 @@ export class MessagesComponent {
   readonly #npmChatStore = inject(NpmChatStore);
   messages = this.#npmChatStore.selectMessages;
   messageCount = this.#npmChatStore.selectMessageCount;
-  scrollableRef = viewChild<ElementRef<HTMLDivElement>>('scrollableRef');
-  scrollable = computed(() => this.scrollableRef()?.nativeElement);
+  scrollable = input.required<HTMLElement>();
 
   constructor() {
     effect(() => {
@@ -38,7 +38,7 @@ export class MessagesComponent {
     });
   }
 
-  #scrollToBottomNextTick(scrollable: HTMLDivElement) {
+  #scrollToBottomNextTick(scrollable: HTMLElement) {
     setTimeout(() => {
       const scrollHeight = scrollable.scrollHeight;
       this.#renderer.setProperty(scrollable, 'scrollTop', scrollHeight);

@@ -1,6 +1,16 @@
-@if (!isLlmLoaded()) {
-<app-llm-progress />
-} @else {
-<app-messages />
-}
-<app-prompt />
+<main
+  class="grid grid-rows-[1fr_100px] mx-auto max-w-screen-lg overflow-hidden"
+>
+  <section #scrollable class="overflow-y-auto h-[calc(100vh-100px)] p-4">
+    @if (!isLlmLoaded()) {
+    <app-llm-progress />
+    } @else { @if (hasMessages()) {
+    <app-messages [scrollable]="scrollable" />
+    } @else {
+    <app-templates />
+    } }
+  </section>
+  <section class="px-4 pb-4">
+    <app-prompt />
+  </section>
+</main>

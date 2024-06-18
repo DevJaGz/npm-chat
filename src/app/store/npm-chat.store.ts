@@ -48,6 +48,7 @@ export class NpmChatStore {
   readonly selectSystemMessage = this.selectState().systemMessage.asReadonly();
   readonly selectIsBusy = this.selectState().isBusy.asReadonly();
 
+  readonly hasMessages = computed(() => this.selectMessageCount() > 0);
   readonly isLlmLoaded = computed(() =>
     Boolean(
       this.selectLlmReport().progress === 1 && this.selectLlmReport().hasEngine

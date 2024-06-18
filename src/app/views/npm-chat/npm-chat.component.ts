@@ -10,6 +10,7 @@ import {
   LlmProgressComponent,
   MessagesComponent,
   PromptComponent,
+  TemplatesComponent,
 } from '@components';
 import { WebllmService } from '@services';
 import { NpmChatStore } from '@store';
@@ -18,7 +19,12 @@ import { APP_NAME } from '@constants';
 @Component({
   selector: 'app-npm-chat',
   standalone: true,
-  imports: [PromptComponent, MessagesComponent, LlmProgressComponent],
+  imports: [
+    PromptComponent,
+    MessagesComponent,
+    LlmProgressComponent,
+    TemplatesComponent,
+  ],
   providers: [NpmChatStore],
   templateUrl: './npm-chat.component.html',
   styles: ``,
@@ -28,9 +34,9 @@ export class NpmChatComponent {
   readonly #webllmService = inject(WebllmService);
   readonly #npmChatStore = inject(NpmChatStore);
   readonly #systemMessage = this.#npmChatStore.selectSystemMessage;
-  // Change app title name
   readonly #title = inject(Title);
 
+  hasMessages = this.#npmChatStore.hasMessages;
   isLlmLoaded = this.#npmChatStore.isLlmLoaded;
 
   constructor() {

@@ -1,6 +1,6 @@
-<section class="fixed bottom-4 right-4 left-4 grid place-items-center">
+<div class="flex flex-col justify-center h-full">
   @if (isLlmLoaded() && !isLlmBusy()) {
-  <div class="flex gap-2 items-center relative w-full max-w-screen-lg">
+  <div class="flex gap-2 items-center relative w-full">
     <textarea
       rows="1"
       class="textarea textarea-bordered flex-1 min-h-12 max-h-48 resize-none rounded-3xl pr-10"
@@ -34,6 +34,6 @@
     </button>
   </div>
   } @else {
-  <div class="skeleton min-h-12 rounded-3xl w-full max-w-screen-lg"></div>
+  <div class="skeleton min-h-12 rounded-3xl"></div>
   }
-</section>
+</div>
