@@ -4,3 +4,4 @@ export * from './messages/messages.component';
 export * from './llm-progress/llm-progress.component';
 export * from './templates/templates.component';
 export * from './template/template.component';
+export * from './chat-brand/chat-brand.component';

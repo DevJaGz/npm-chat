@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import {
+  ChatBrandComponent,
   LlmProgressComponent,
   MessagesComponent,
   PromptComponent,
@@ -24,6 +25,7 @@ import { APP_NAME } from '@constants';
     MessagesComponent,
     LlmProgressComponent,
     TemplatesComponent,
+    ChatBrandComponent,
   ],
   providers: [NpmChatStore],
   templateUrl: './npm-chat.component.html',
