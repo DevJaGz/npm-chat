@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="./public/og.png" alt="AGMednet Logo" width=200">
+  <img src="./public/og.png" alt="AGMednet Logo" width="200">
   <br>
   <br>
   Npm Chat Repository
