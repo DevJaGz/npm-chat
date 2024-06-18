@@ -14,7 +14,7 @@
 
 <br>
 
-Demo of a chatbot powered by NPM packages in your browser 🤖
+Chatbot powered by NPM packages in your browser 🤖
 
 See [demo](https://npm-chat.vercel.app/) 🎉
 
