@@ -1,27 +1,78 @@
-# NpmChat
+<h1 align="center">
+  <br>
+  <img src="./public/og.png" alt="AGMednet Logo" width=200">
+  <br>
+  <br>
+  Npm Chat Repository
+</h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
+<div align="center">
+  <a href="https://angular.io/" target="_blank">
+    <img src="https://img.shields.io/badge/Angular-%23c3002f?logo=angular" alt="Angular">
+  </a>
+</div>
 
-## Development server
+<br>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Demo of a chatbot powered by NPM packages in your browser 🤖
 
-## Code scaffolding
+See [demo](https://npm-chat.vercel.app/) 🎉
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+<details open="open">
+<summary > <h2 style="display:inline-block">📖 Table of Contents</h2>  </summary>
 
-## Build
+- 📋 [Requirements](#requirements)
+- 🔄 [Installation](#installation)
+- 🚀 [Run](#run)
+- 📦 [Build](#build)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+</details>
 
-## Running unit tests
+## <a name="requirements"></a> 📋 Requirements
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- node v20.12.0
+- pnpm v9.0.6
 
-## Running end-to-end tests
+## <a name="installation"></a> 🔄 Installation
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. Clone the repository
 
-## Further help
+- ssh
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+git@github.com:DevJaGz/npm-chat.git
+```
+
+- https
+
+```bash
+https://github.com/DevJaGz/npm-chat.git
+```
+
+- Github CLI
+
+```bash
+gh repo clone DevJaGz/npm-chat
+```
+
+2. Install dependencies
+
+```bash
+pnpm install
+```
+
+## <a name="run"></a> 🚀 Run
+
+Run the application in development mode
+
+```bash
+pnpm start
+```
+
+## <a name="build"></a> 📦 Build
+
+- Production distribution
+
+```bash
+pnpm build
+```
