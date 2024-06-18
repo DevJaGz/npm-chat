@@ -1,5 +1,5 @@
-<div class="h-full">
-  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-    <app-template />
-  </div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+  @for (template of templates; track $index) {
+  <app-template [template]="template" />
+  }
 </div>
