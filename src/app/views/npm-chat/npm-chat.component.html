@@ -1,23 +1,25 @@
-<main
-  class="grid grid-rows-[1fr_100px] mx-auto max-w-screen-lg overflow-hidden"
->
-  <section #scrollable class="overflow-y-auto h-[calc(100vh-100px)] p-4">
+<main class="grid grid-rows-[1fr_100px] overflow-hidden">
+  <section #scrollable class="overflow-y-auto h-[calc(100vh-100px)]">
     @if (!isLlmLoaded()) {
     <app-llm-progress />
     <div class="fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
       <app-chat-brand />
     </div>
     } @else { @if (hasMessages()) {
-    <app-messages [scrollable]="scrollable" />
+    <div class="h-full p-4 mx-auto max-w-screen-lg">
+      <app-messages [scrollable]="scrollable" />
+    </div>
     } @else {
-    <div class="flex flex-col items-center justify-center h-full gap-8">
+    <div
+      class="flex flex-col items-center justify-center h-full gap-8 p-4 mx-auto max-w-screen-lg"
+    >
       <app-chat-brand />
       <app-templates />
     </div>
 
     } }
   </section>
-  <section class="px-4 pb-4">
+  <section class="px-4 w-full h-full mx-auto max-w-screen-lg">
     <app-prompt />
   </section>
 </main>
