@@ -7,7 +7,7 @@
 </h1>
 
 <div align="center">
-  <a href="https://angular.io/" target="_blank">
+  <a href="https://angular.dev/" target="_blank">
     <img src="https://img.shields.io/badge/Angular-%23c3002f?logo=angular" alt="Angular">
   </a>
 </div>
