@@ -7,3 +7,4 @@ export * from './template/template.component';
 export * from './chat-brand/chat-brand.component';
 export * from './theme-btn/theme-btn.component';
 export * from './repo-btn/repo-btn.component';
+export * from './new-chat-btn/new-chat-btn.component';

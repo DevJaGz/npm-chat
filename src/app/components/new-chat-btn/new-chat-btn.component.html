@@ -1,0 +1,7 @@
+@if (isLlmBusy()) {
+<div class="skeleton w-[88px] h-[32px]"></div>
+} @else {
+<button type="button" class="btn btn-sm btn-primary" (click)="clearChat()">
+  New Chat
+</button>
+}

@@ -1,4 +1,15 @@
-<div class="flex flex-col justify-center items-center gap-2">
+<div
+  class="flex flex-col justify-center items-center gap-2"
+  [class.flex-row]="horizontal()"
+  [class.justify-start]="horizontal()"
+  [class.flex-col]="!horizontal()"
+  [class.justify-center]="!horizontal()"
+>
+  @if(asTitle()){
   <img src="/android-chrome-512x512.png" width="32" height="32" alt="logo" />
   <h1 class="font-semibold text-2xl">Npm Chat</h1>
+  } @else {
+  <img src="/android-chrome-512x512.png" width="16" height="16" alt="logo" />
+  <p>Npm Chat</p>
+  }
 </div>

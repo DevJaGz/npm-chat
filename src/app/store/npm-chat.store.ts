@@ -127,6 +127,11 @@ export class NpmChatStore {
     state.set(value);
   }
 
+  clearMessages(): void {
+    const state = this.#state().messages;
+    state.set([]);
+  }
+
   #setMessageCount(value: number): void {
     const state = this.#state().messageCount;
     state.set(value);

@@ -8,6 +8,7 @@ import {
   TemplatesComponent,
   ThemeBtnComponent,
   RepoBtnComponent,
+  NewChatBtnComponent,
 } from '@components';
 import { WebllmService } from '@services';
 import { NpmChatStore } from '@store';
@@ -24,6 +25,7 @@ import { APP_NAME } from '@constants';
     ChatBrandComponent,
     ThemeBtnComponent,
     RepoBtnComponent,
+    NewChatBtnComponent,
   ],
   providers: [NpmChatStore],
   templateUrl: './npm-chat.component.html',
