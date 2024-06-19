@@ -141,6 +141,13 @@ export class NpmChatStore {
       tokens: null,
     });
     this.setIsBusy(true);
+    this.#observeChatReply(currentMessages, assistantMessage);
+  }
+
+  #observeChatReply(
+    currentMessages: Messages,
+    assistantMessage: Message
+  ): void {
     this.#webllmService.getChatReply(currentMessages).subscribe({
       next: (llmReply) => {
         const usage = llmReply.usage;
