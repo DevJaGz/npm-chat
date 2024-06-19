@@ -1,5 +1,10 @@
+<header class="z-10 flex items-center h-[60px] px-4 mx-auto max-w-screen-lg">
+  <div class="flex justify-end flex-1">
+    <app-theme-btn />
+  </div>
+</header>
 <main class="grid grid-rows-[1fr_100px] overflow-hidden">
-  <section #scrollable class="overflow-y-auto h-[calc(100vh-100px)]">
+  <section #scrollable class="overflow-y-auto h-[calc(100vh-160px)]">
     @if (!isLlmLoaded()) {
     <app-llm-progress />
     <div class="fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">

@@ -12,6 +12,7 @@ import {
   MessagesComponent,
   PromptComponent,
   TemplatesComponent,
+  ThemeBtnComponent,
 } from '@components';
 import { WebllmService } from '@services';
 import { NpmChatStore } from '@store';
@@ -26,6 +27,7 @@ import { APP_NAME } from '@constants';
     LlmProgressComponent,
     TemplatesComponent,
     ChatBrandComponent,
+    ThemeBtnComponent,
   ],
   providers: [NpmChatStore],
   templateUrl: './npm-chat.component.html',
