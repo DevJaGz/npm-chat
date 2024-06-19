@@ -6,7 +6,11 @@ import {
   Renderer2,
   inject,
 } from '@angular/core';
-import { DAISY_IU_THEME_DATA_KEY, THEME_KEY } from '@constants';
+import {
+  DAISY_IU_THEME_DATA_KEY,
+  TAILWIND_DARK_THEME_CLASS,
+  THEME_KEY,
+} from '@constants';
 import { ThemeMode } from '@models';
 import { LocalStorageService } from '@services';
 import { ThemeStore } from '@store';
@@ -50,6 +54,18 @@ export class ThemeBtnComponent implements AfterViewInit {
       this.#document.documentElement,
       DAISY_IU_THEME_DATA_KEY,
       themeMode
+    );
+    const isDarkTheme = this.isDarkTheme();
+    if (isDarkTheme) {
+      this.#renderer.addClass(
+        this.#document.documentElement,
+        TAILWIND_DARK_THEME_CLASS
+      );
+      return;
+    }
+    this.#renderer.removeClass(
+      this.#document.documentElement,
+      TAILWIND_DARK_THEME_CLASS
     );
   }
 
