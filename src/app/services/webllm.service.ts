@@ -82,7 +82,10 @@ export class WebllmService implements LLMService {
     try {
       const chunks = await this.#engine.chat.completions.create({
         messages,
-        temperature: 0.5,
+        temperature: 0.7,
+        top_p: 0.9,
+        presence_penalty: 0.6,
+        frequency_penalty: 0.4,
         stream: true,
         stream_options: { include_usage: true },
       });
