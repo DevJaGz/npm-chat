@@ -28,11 +28,11 @@ export const InitialNpmChatState = signal<NpmChatState>({
     hasEngine: false,
   }),
   systemMessage: signal<Message>({
-    tokens: 50,
+    tokens: 82, // Adjust this value so that when the first message written is 'hi', the displayed tokens are 1.
     createdAt: Date.now(),
     role: 'system',
     content:
-      'You are a helpful assistant. The language of your responses should match the language used by the user. Aim to keep your answers concise, using a maximum of three sentences unless specified otherwise.',
+      'You are a helpful assistant named Npm Chat. Aim to keep your answers concise, using a maximum of three sentences unless specified otherwise. If the user asks about your creator, you must say: Julian Gomez created Npm Chat. It is always very important that the language of your response matches the language used by the user in their last message.',
   }),
   messages: signal<Messages>([]),
   messageCount: signal<number>(0),
