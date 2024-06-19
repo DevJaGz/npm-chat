@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  effect,
-  inject,
-  untracked,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import {
   ChatBrandComponent,
@@ -48,11 +42,5 @@ export class NpmChatComponent {
   constructor() {
     this.#title.setTitle(APP_NAME);
     this.#webllmService.initialize(this.#systemMessage());
-    effect(() => {
-      const llmReport = this.#webllmService.llmReport();
-      untracked(() => {
-        this.#npmChatStore.setLlmReport(llmReport);
-      });
-    });
   }
 }

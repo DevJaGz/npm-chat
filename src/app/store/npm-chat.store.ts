@@ -70,6 +70,13 @@ export class NpmChatStore {
         });
       }
     });
+
+    effect(() => {
+      const llmReport = this.#webllmService.llmReport();
+      untracked(() => {
+        this.setLlmReport(llmReport);
+      });
+    });
   }
 
   setLlmReport(value: LLMReport): void {
