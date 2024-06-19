@@ -15,7 +15,7 @@
   </div>
 </header>
 <main class="grid grid-rows-[1fr_100px] overflow-hidden">
-  <section #scrollable class="overflow-y-auto h-[calc(100vh-160px)]">
+  <section #scrollable class="overflow-y-auto h-[calc(100svh-160px)]">
     @if (!isLlmLoaded()) {
     <app-llm-progress />
     <div class="fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
@@ -26,11 +26,11 @@
       <app-messages [scrollable]="scrollable" />
     </div>
     } @else {
-    <div
-      class="flex flex-col items-center justify-center h-full gap-8 p-4 mx-auto max-w-screen-lg"
-    >
-      <app-chat-brand />
-      <app-templates />
+    <div class="grid place-items-center h-full gap-8 mx-auto max-w-screen-lg">
+      <div class="flex flex-col gap-8 p-4">
+        <app-chat-brand />
+        <app-templates />
+      </div>
     </div>
 
     } }
