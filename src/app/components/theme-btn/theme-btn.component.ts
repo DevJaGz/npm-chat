@@ -28,6 +28,7 @@ export class ThemeBtnComponent implements AfterViewInit {
   readonly #localStorage = inject(LocalStorageService);
   readonly #renderer = inject(Renderer2);
   readonly #document = inject(DOCUMENT);
+  currentTheme = this.#themeStore.selectTheme;
   isDarkTheme = this.#themeStore.isDarkTheme;
 
   ngAfterViewInit(): void {
@@ -35,12 +36,16 @@ export class ThemeBtnComponent implements AfterViewInit {
     if (storedTheme) {
       this.#setTheme(storedTheme);
       this.#renderTheme(storedTheme);
+      return;
     }
+    const currentTheme = this.currentTheme();
+    this.#saveTheme(currentTheme);
+    this.#renderTheme(currentTheme);
   }
 
   toggleTheme(): void {
     this.#themeStore.toggleTheme();
-    const currentTheme = this.#themeStore.selectTheme();
+    const currentTheme = this.currentTheme();
     this.#renderTheme(currentTheme);
     this.#saveTheme(currentTheme);
   }
