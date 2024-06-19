@@ -10,12 +10,8 @@
     <div class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
       <app-chat-brand [horizontal]="true" [asTitle]="false" />
     </div>
+    <app-new-chat-btn />
     }
-    <div>
-      @if (hasMessages()) {
-      <app-new-chat-btn />
-      }
-    </div>
   </div>
 </header>
 <main class="grid grid-rows-[1fr_100px] overflow-hidden">
