@@ -1,16 +1,20 @@
 <header class="z-10 flex items-center h-[60px] mx-auto max-w-screen-lg">
   <div
-    class="flex items-center justify-between flex-1 border-b border-solid border-neutral-300 dark:border-neutral-700 px-4 h-full"
+    class="relative flex items-center justify-between flex-1 border-b border-solid border-neutral-300 dark:border-neutral-700 px-4 h-full"
   >
+    <div class="flex items-center justify-end gap-1">
+      <app-repo-btn />
+      <app-theme-btn />
+    </div>
+    @if (hasMessages()) {
+    <div class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
+      <app-chat-brand [horizontal]="true" [asTitle]="false" />
+    </div>
+    }
     <div>
       @if (hasMessages()) {
       <app-new-chat-btn />
       }
-    </div>
-
-    <div class="flex items-center justify-end gap-1">
-      <app-repo-btn />
-      <app-theme-btn />
     </div>
   </div>
 </header>
