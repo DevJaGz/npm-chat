@@ -28,7 +28,7 @@ export const InitialNpmChatState = signal<NpmChatState>({
     hasEngine: false,
   }),
   systemMessage: signal<Message>({
-    tokens: 82, // Adjust this value so that when the first message written is 'hi', the displayed tokens are 1.
+    tokens: 78, // Adjust this value so that when the first message written is 'hi', the displayed tokens are 1.
     createdAt: Date.now(),
     role: 'system',
     content:
