@@ -19,10 +19,10 @@ export class WebllmService implements LLMService {
   // readonly #modelId = 'gemma-2b-it-q4f16_1-MLC-1k'; // ❌  relative Delayed Download
   // readonly #modelId = 'stablelm-2-zephyr-1_6b-q4f16_1-MLC'; // ✅ relative Delayed Download
   // readonly #modelId = 'Qwen2-0.5B-Instruct-q0f16-MLC'; // ✅ relative Delayed Download
-  // readonly #modelId = 'Qwen2-1.5B-Instruct-q4f32_1-MLC'; // ✅ relative Delayed Download
+  readonly #modelId = 'Qwen2-1.5B-Instruct-q4f32_1-MLC'; // ✅ relative Delayed Download
   // readonly #modelId = 'Qwen2-1.5B-Instruct-q4f16_1-MLC'; // ❌ relative Delayed Download
   // readonly #modelId = 'Phi-3-mini-4k-instruct-q4f32_1-MLC-1k'; // ✅ relative Delayed Download
-  readonly #modelId = 'gemma-2b-it-q4f32_1-MLC'; //   Delayed Download
+  // readonly #modelId = 'gemma-2b-it-q4f32_1-MLC'; //   Delayed Download
   // readonly #modelId = 'Qwen2-0.5B-Instruct-q0f32-MLC'; // ✅  Delayed Download
   // readonly #modelId = 'Phi-3-mini-4k-instruct-q4f16_1-MLC-1k'; // ❌ Delayed Download
   // readonly #modelId = 'TinyLlama-1.1B-Chat-v1.0-q4f16_1-MLC'; // ❌ Delayed Download
