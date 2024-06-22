@@ -18,7 +18,9 @@
   <section #scrollable class="overflow-y-auto h-[calc(100svh-160px)]">
     @if (!isLlmLoaded()) {
     <app-llm-progress />
-    <div class="fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
+    <div
+      class="fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-full p-4"
+    >
       <app-brand-details />
     </div>
     } @else { @if (hasMessages()) {
