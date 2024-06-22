@@ -1,7 +1,11 @@
 @if (isLlmBusy()) {
-<div class="skeleton w-[88px] h-[32px]"></div>
+<div class="skeleton w-[88px] h-[32px] rounded-[10px]"></div>
 } @else {
-<button type="button" class="btn btn-sm btn-primary" (click)="clearChat()">
+<button
+  type="button"
+  class="btn btn-sm btn-primary rounded-[10px]"
+  (click)="clearChat()"
+>
   New Chat
 </button>
 }
